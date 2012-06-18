@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block main %}
+  {% for article in articles %}
+  <div class="block">
+    {% include "article.html" %}
+    <h3 id="disqus">Comments</h3>
+
+    <div id="disqus_thread"></div>
+
+
+    {% if devel %}
+      <script type="text/javascript">
+        disqus_developer = 1;
+      </script>
+    {% endif %}
+
+    <script type="text/javascript" src="http://disqus.com/forums/commanderblop/embed.js"></script>
+    <noscript><a href="http://disqus.com/forums/commanderblop/?url=ref">View the discussion thread.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+  </script>
+
+    </div>
+  {% endfor %}
+{% endblock %}

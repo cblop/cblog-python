@@ -1,0 +1,11 @@
+    <div class="post_title"><a href="{{ article.path }}">{{ article.title  }}</a>
+        <span class="tags">
+    
+        {% for tag in article.tags %}
+            <a href="{{ tag_path }}/{{ tag }}">{{ tag }}</a>
+            {% if not forloop.last %},&nbsp{% endif %}
+        {% endfor %}
+    
+        </span></div>
+    <p class="date">{{ article.date_published|date:"j F, Y" }}</p>
+    <div class="post">{{ article.body }}</div>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Play&v2&text=article%20list' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Mako&v2' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+
+    <script type="text/javascript">
+
+    function new_article()
+    {
+        document.admin.action = "/admin/article/new/"
+        document.admin.submit()
+    }
+
+    function del(del_id)
+    {
+        if (confirm("Sure?"))
+        {
+            
+            document.location = "/admin/article/delete/?id=" + del_id
+        }
+    }
+
+
+
+    </script>
+
+</head>
+<body>
+    <div id="header-dec">
+    <div id="header">
+        <div id="title">article list</div>
+        <div id="subtitle">Select 'n' edit or go <a href="/">back to the blog</a>.</div>
+    </div>
+</div>
+    <div id="content">
+        
+    <div id="button_new">
+    <input class="button" type="button" name="new" onClick="new_article()" value="New Post" /> 
+    </div>
+
+        <div class="block">
+            <form action="" method="show" name="admin">
+            <ul class="post_title">
+            {% for article in articles %}
+                {% if article.draft %}
+                    <li class="admin-draft">
+                {% else %}
+                    <li class="admin-published">
+                {% endif %}
+                <input class="del_button" type="button" name="delete" onClick='del("{{ article.id }}")' value="del" />
+                <a href="/admin/article/edit/?id={{ article.id }}">{{ article.date_published|date:"j F, Y" }} - {{ article.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </form>
+
+        </div>
+        
+    </div>
+
+
+</body>
+</html>

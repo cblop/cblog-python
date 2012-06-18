@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Play&v2&text=edit%20article' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Mako&v2' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+
+<script type="text/javascript">
+
+String.prototype.trim = function() 
+{
+    return this.replace(/^\s+|\s+$/g,"");
+}
+
+String.prototype.ltrim = function() 
+{
+    return this.replace(/^\s+/,"");
+}
+
+String.prototype.rtrim = function() 
+{
+    return this.replace(/\s+$/,"");
+}
+
+function save_article()
+{
+    if (document.article.title.value.trim() == '')
+    {
+        alert("You must supply a title.")
+        return
+    }
+
+    if (document.article.content.value.trim() == '')
+    {
+        alert("You must supply content.")
+        return
+    }
+
+    document.article.action = "/admin/article/save/"
+    document.article.submit()
+}
+
+function save_and_reedit()
+{
+    document.article.action = "/admin/article/save/"
+    document.article.edit_again.value = "true"
+    document.article.submit()
+}
+
+
+function cancel_edit()
+{
+    if (confirm("Really cancel?"))
+        document.location = '/admin/'
+}
+
+</script>
+
+</head>
+<body>
+    <div id="header-dec">
+    <div id="header">
+        <div id="title">edit article</div>
+        <div id="subtitle">Do what you must, Commander</div>
+    </div>
+</div>
+    <div id="content">
+        <div class="block">
+    <form name="article" method="post" action="">
+    <h2>Title:</h2>
+    <span id="checkbox">
+    Draft?&nbsp&nbsp&nbsp
+    {% if article.draft %}
+      <input type="checkbox" name="draft" checked="true"/>
+    {% else %}
+      <input type="checkbox" name="draft"/>
+    {% endif %}
+    </span>
+    <input class="input" name="title" type="text" id="input_title" value="{{ article.title }}" />
+    <h2>Body:</h2>
+    <textarea name="content" id="bodytext">{{ article.body }}</textarea>
+    <h2>Tags:</h2>
+    <input class="input" type="text" name="tags" value="{{ article.tag_string }}" />
+    <h2>Short URL (cblop.org/):</h2>
+    <input class="input" type="text" name="short_url" value="{{ article.short_url }}" />
+<br />
+<div align="center">
+<input class="sm_button" type="button" name="save" onClick="save_article()" value="Save" />
+<input class="sm_button" type="button" name="save" onClick="save_and_reedit()" value="Save and Keep Editing" />
+<input class="sm_button" type="button" name="cancel" onClick="cancel_edit()" value="Cancel">
+</div>
+</div>
+{% if article.id %}
+<input type="hidden" name="id" value="{{ article.id }}"/>
+{% endif %}
+<input type="hidden" name="loaded_draft" value="{{ article.draft }}"/>
+<input type="hidden" name="edit_again" value="false"/>
+</form> 
+
+
+        </div>
+<!--
+        <h2 class="admin-page-title">Preview:</h2>
+<div style="border-top: 1px solid black">
+<iframe src="/id/{{ article.id }}" width="97%" scrolling="auto" height="750"
+        frameborder="0">
+</iframe>
+</div> --!>
+        
+    </div>
+
+
+</body>
+</html>

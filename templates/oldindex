@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Commander Blop</title>
+    <link href='http://fonts.googleapis.com/css?family=Play&v2&text=commander%20blop' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Mako&v2' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+
+</head>
+<body>
+    <div id="header-dec">
+    <div id="header">
+        <div id="title"><a href="#">{{ title }}</a></div>
+        <div id="subtitle">Being the blog of a young man whose principal interests are <a href="#">music</a>, <a href="#">AI</a>, <a href="#">web apps</a> and <a href="#">Japan</a>.</div>
+    </div>
+</div>
+    <div id="content">
+        {% block main %}
+        {% endblock %}
+    </div>
+
+
+</body>
+</html>

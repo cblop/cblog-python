@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+  {% for article in articles %}
+  <div class="block">
+    {% include "article.html" %}
+    <div class="comments"><a href="{{ article.path }}#disqus_thread"></a></div>
+    </div>
+  {% endfor %}
+{% endblock %}
